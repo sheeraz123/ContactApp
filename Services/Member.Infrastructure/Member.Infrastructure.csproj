@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Member.Application\Member.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\" />
-  </ItemGroup>
-
 </Project>
