@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Member.Application.Features.MembersInfo.Command.DeleteMember
 {
-    public class DeleteMemberCommand : IRequest<Unit>
+    public class DeleteMemberCommand : IRequest<bool>
     {
        
 

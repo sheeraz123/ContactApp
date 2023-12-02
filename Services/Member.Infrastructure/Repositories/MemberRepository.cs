@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -38,8 +39,10 @@ namespace Member.Infrastructure.Repositories
 		}
 		public async Task<MemberInfo> AddAsync(MemberInfo memberInfo)
         {
-     
-            memberInfos.Add(memberInfo);
+			int id=memberInfos.Select(m=>m.Id).LastOrDefault();
+			memberInfo.Id = id + 1;
+
+			memberInfos.Add(memberInfo);
             saveData(memberInfos);
 			var resultsTask = Task.Run(() => memberInfos.Where(x => x.Id == memberInfo.Id).SingleOrDefault());
             return await resultsTask;
@@ -48,7 +51,10 @@ namespace Member.Infrastructure.Repositories
         public async Task<bool> DeleteAsync(int id)
         {
             var result=memberInfos.Where(x=>x.Id==id).SingleOrDefault();        
-            var resultsTask = Task.Run(() => memberInfos.Remove(result));
+            if(result==null)
+				throw new ArgumentNullException();
+
+			var resultsTask = Task.Run(() => memberInfos.Remove(result));
 			saveData(memberInfos);
 			return await resultsTask;
         }

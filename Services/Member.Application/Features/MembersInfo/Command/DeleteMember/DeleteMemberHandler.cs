@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Member.Application.Features.MembersInfo.Command.DeleteMember
 {
-    public class DeleteMemberHandler : IRequestHandler<DeleteMemberCommand, Unit>
+    public class DeleteMemberHandler : IRequestHandler<DeleteMemberCommand, bool>
     {
         private readonly IMemberRepository memberRepository;
         private readonly ILogger<DeleteMemberHandler> logger;
@@ -24,10 +24,10 @@ namespace Member.Application.Features.MembersInfo.Command.DeleteMember
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteMemberCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteMemberCommand request, CancellationToken cancellationToken)
         {
             var result = await memberRepository.DeleteAsync(request.Id);
-            return Unit.Value;
+            return result;
         }
     }
 }

@@ -35,24 +35,35 @@ namespace Member.API.Middlewares.GolbalExceptionMiddleware
 
             };
             string result = "";
-            var errors=((ValidationException)exception).Errors;
-			
-            if (errors != null)
+            if (statusCode == (int)HttpStatusCode.BadRequest)
             {
-                result = JsonConvert.SerializeObject(new
+                var errors = ((ValidationException)exception).Errors;
+
+                if (errors != null)
                 {
-                    StatusCode = statusCode,//errors.Select(e => e.ErrorCode).FirstOrDefault(),
-                    ErrorMessage = errors.Select(e => e.ErrorMessage).FirstOrDefault()
-                }); ;
-			}
+                    result = JsonConvert.SerializeObject(new
+                    {
+                        StatusCode = statusCode,//errors.Select(e => e.ErrorCode).FirstOrDefault(),
+                        ErrorMessage = errors.Select(e => e.ErrorMessage).FirstOrDefault()
+                    }); ;
+                }
+                else
+                {
+                    result = JsonConvert.SerializeObject(new
+                    {
+                        StatusCode = statusCode,
+                        ErrorMessage = exception.Message
+                    });
+                }
+            }
             else
             {
-                 result = JsonConvert.SerializeObject(new
-                {
-                    StatusCode = statusCode,
-                    ErrorMessage = exception.Message
-                });
-            }
+				result = JsonConvert.SerializeObject(new
+				{
+					StatusCode = statusCode,
+					ErrorMessage = exception.Message
+				});
+			}
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
             return context.Response.WriteAsync(result);

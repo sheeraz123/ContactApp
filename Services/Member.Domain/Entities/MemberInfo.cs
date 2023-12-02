@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Member.Domain.Entities
 {
+    /// <summary>
+    /// class is use for member data manipulation
+    /// </summary>
     public class MemberInfo
     {
         [Key]
