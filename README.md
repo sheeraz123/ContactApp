@@ -7,3 +7,4 @@ How to run the application?
 	• You will see swagger page of Member Api.
 	• In Swagger you can play with Api.
 
+
