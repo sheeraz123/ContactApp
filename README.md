@@ -5,6 +5,4 @@ Application Setup prerequisite
 How to run the application?
 	• Build the program and run the application (Press F5).	
 	• You will see swagger page of Member Api.
-	• In Swagger you can play with Api.
-
-
+In Swagger you can play with Api.
