@@ -35,7 +35,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Contacts Management Application][product-screenshot]
+[Contacts Management Application]
 
 This project is use for store the member information in JSON file. 
 
